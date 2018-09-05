@@ -66,7 +66,7 @@ class Migrate {
         return $result;
     }
 
-    public static function run() {
+    public static function up() {
         $cli = defined('STDIN') ? true : false;
         if (is_null(self::getDirectory())) {
             throw new \RuntimeException('Migrations directory not set');
