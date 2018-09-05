@@ -1,4 +1,4 @@
-# php-library-migrate
+# PHP Library Migrate #
 
 Create a migrate.php file at a location of your preference (this example uses "app/migrate.php").
 
