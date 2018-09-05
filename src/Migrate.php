@@ -67,6 +67,7 @@ class Migrate {
     }
 
     public static function run() {
+        $cli = defined('STDIN') ? true : false;
         if (is_null(self::getDirectory())) {
             throw new \RuntimeException('Migrations directory not set');
         }
@@ -89,23 +90,23 @@ class Migrate {
             $name = substr(substr($migrationFile, 18), 0, -4);
             $classNameWithSpaces = \Sinevia\StringUtils::camelize(str_replace('_', ' ', $name));
             $className = str_replace(' ', '', $classNameWithSpaces);
-            var_dump($name);
-            var_dump($className);
+            // DEBUG: var_dump($name);
+            // DEBUG: var_dump($className);
 
             if (self::getMigration($migrationFile) != null) {
-                echo " - File $migrationFile ALREADY processed. SKIPPED.\n<br />";
+                echo " - File $migrationFile ALREADY processed. SKIPPED.\n" . ($cli ? '' : '<br />');
                 continue;
             }
 
-            echo " - Processing file $migrationFile class $className ...\n<br />";
+            echo " - Processing file $migrationFile class $className ...\n" . ($cli ? '' : '<br />');
 
-            var_dump($migrationFile);
+            // DEBUG: var_dump($migrationFile);
             require_once self::getDirectory() . '/' . $migrationFile;
 
             $class = new $className;
             $class->up();
 
-            MigrationPlugin::createMigration([
+            self::createMigration([
                 'Migration' => $migrationFile,
                 'CreatedAt' => date('Y-m-d'),
                 'UpdatedAt' => date('Y-m-d'),
