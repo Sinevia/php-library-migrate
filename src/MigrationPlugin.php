@@ -1,5 +1,7 @@
 <?php
-class MigrationPlugin extends BasePlugin {
+namespace Sinevia;
+
+class Migrate {
     public static $tableMigration = 'snv_migrations_migration';
     public static $tableMigrationSchema = array(
         array("Id", "STRING", "NOT NULL PRIMARY KEY"),
