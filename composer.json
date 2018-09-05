@@ -1,0 +1,19 @@
+{
+    "name": "sinevia/php-library-migrate",
+    "description": "PHP Library Migrate",
+    "type": "library",
+    "keywords": ["migrate", "library", "php", "sinevia"],    
+    "homepage": "http://github.com/sinevia/php-library-migrate",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Milan Lesichkov",
+            "email": "lesichkovm@gmail.com",
+            "homepage": "http://lesichkov.co.uk",
+            "role": "Lead Developer"
+        }
+    ],
+    "autoload": {
+        "files": ["src/Migrate.php"]
+    }
+}
