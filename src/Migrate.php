@@ -88,7 +88,7 @@ class Migrate {
                 continue;
             }
             $name = substr(substr($migrationFile, 18), 0, -4);
-            $classNameWithSpaces = \Sinevia\StringUtils::camelize(str_replace('_', ' ', $name));
+            $classNameWithSpaces = self::camelize(str_replace('_', ' ', $name));
             $className = str_replace(' ', '', $classNameWithSpaces);
             // DEBUG: var_dump($name);
             // DEBUG: var_dump($className);
@@ -112,6 +112,17 @@ class Migrate {
                 'UpdatedAt' => date('Y-m-d'),
             ]);
         }
+    }
+    
+    private static function camelize($string, $separator = " ", $remove_separator = false) {
+        $string = str_replace($separator, " ", $string);
+        $ucstring = ucwords($string);
+        if ($remove_separator) {
+            $string = str_replace(" ", "", $ucstring);
+        } else {
+            $string = str_replace(" ", $separator, $ucstring);
+        }
+        return $string;
     }
 
 }
