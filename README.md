@@ -33,6 +33,9 @@ The migrations will be sorted alphabetically in ascending order and run
 
 ```
 require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+db()->debug = true; // if you want to trace what is going on
+
 Sinevia\Migrate::setDirectoryMigration(__DIR__.'/Migrations');
 Sinevia\Migrate::setDatabase(db());
 Sinevia\Migrate::up();
