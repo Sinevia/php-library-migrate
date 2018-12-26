@@ -87,7 +87,7 @@ class Migrate {
                 echo " - File $migrationFile no '.php' extension. SKIPPED.\n<br />";
                 continue;
             }
-            $name = substr(substr($migrationFile, 18), 0, -4);
+            $name = substr(substr($migrationFile, 16), 0, -4);
             $classNameWithSpaces = self::camelize(str_replace('_', ' ', $name));
             $className = str_replace(' ', '', $classNameWithSpaces);
             // DEBUG: var_dump($name);
