@@ -2,9 +2,9 @@
 
 ## How to Use ##
 
-1. Create a migrationn directory to hold your migration files
+1. Create a migration directory to hold your migration files
 
-2. Create the migration files with the following format YYYY_MM_DD_SEQNCE_ClassName (i.e. 2018_09_05_000001_CreateSettingsTable).
+2. Create the migration files with the following format YYYYMMDD_SEQNCE_ClassName (i.e. 20180905_000001_CreateSettingsTable).
 
 ```
 class CreateSettingsTable {
