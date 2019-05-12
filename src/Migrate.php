@@ -4,6 +4,7 @@ namespace Sinevia;
 
 class Migrate {
 
+    public static $verbose = true;
     public static $db = null;
     public static $directoryMigrations = null;
     public static $tableMigration = 'snv_migrations_migration';
@@ -98,7 +99,9 @@ class Migrate {
                 continue;
             }
 
-            echo " - Processing file $migrationFile class $className ...\n" . ($cli ? '' : '<br />');
+            if (self::$verbose) {
+                echo " - Processing file $migrationFile class $className ...\n" . ($cli ? '' : '<br />');
+            }
 
             // DEBUG: var_dump($migrationFile);
             require_once self::getDirectory() . '/' . $migrationFile;
@@ -113,7 +116,7 @@ class Migrate {
             ]);
         }
     }
-    
+
     private static function camelize($string, $separator = " ", $remove_separator = false) {
         $string = str_replace($separator, " ", $string);
         $ucstring = ucwords($string);
