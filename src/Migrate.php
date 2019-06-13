@@ -85,7 +85,9 @@ class Migrate {
             }
             $ext = pathinfo($migrationFile, PATHINFO_EXTENSION);
             if ($ext != 'php') {
-                echo " - File $migrationFile no '.php' extension. SKIPPED.\n<br />";
+                if (self::$verbose) {
+                    echo " - File $migrationFile no '.php' extension. SKIPPED.\n<br />";
+                }
                 continue;
             }
             $name = substr(substr($migrationFile, 16), 0, -4);
@@ -95,7 +97,9 @@ class Migrate {
             // DEBUG: var_dump($className);
 
             if (self::getMigration($migrationFile) != null) {
-                echo " - File $migrationFile ALREADY processed. SKIPPED.\n" . ($cli ? '' : '<br />');
+                if (self::$verbose) {
+                    echo " - File $migrationFile ALREADY processed. SKIPPED.\n" . ($cli ? '' : '<br />');
+                }
                 continue;
             }
 
