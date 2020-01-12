@@ -35,12 +35,27 @@ class Migrate {
     }
 
     /**
-     * 
-     * @param \Sinevia\SqlDb $db
+     * Sets database for the migration table to be created in
+     * @param mixed $db one of 'Sinevia\SqlDb','PDO', 'Illuminate\Database\Capsule\Manager'
      */
     public static function setDatabase($db) {
-        if (get_class($db) != 'Sinevia\SqlDb') {
-            throw new \RuntimeException('Expected database class of type Sinevia\SqlDb received ' . get_class($db));
+        $allowedClasses = [
+            'Illuminate\Database\Capsule\Manager',
+            'PDO',
+            'Sinevia\SqlDb',
+        ];
+        if (in_array(get_class($db), $allowedClasses) == false) {
+            throw new \RuntimeException('Expected database class of types ' . implode(' or ', $allowedClasses) . ' received ' . get_class($db));
+        }
+        if (get_class($db) == 'Illuminate\Database\Capsule\Manager') {
+            $sqlDb = new SqlDb();
+            $sqlDb->setPdo($db->getConnection()->getPdo());
+            $db = $sqlDb;
+        }
+        if (get_class($db) == 'PDO') {
+            $sqlDb = new SqlDb();
+            $sqlDb->setPdo($db);
+            $db = $sqlDb;
         }
 
         self::$db = $db;
